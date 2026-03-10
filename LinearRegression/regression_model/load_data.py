@@ -1,10 +1,8 @@
 import pandas as pd
 
-def load_data(file_path):
-    try:
-        data = pd.read_csv(file_path)
-        print(f"Data loaded successfully from {file_path}")
-        return data
-    except Exception as e:
-        print(f"An error occurred while loading the data: {e}")
-        return None
+def load_dataset(path):
+    df = pd.read_csv(path, encoding="latin-1", sep=";")
+    return df
+
+def remove_extreme_stations(df):
+    return df[~df["station name"].isin(["Mont Ventoux", "Pic du Midi"])]
