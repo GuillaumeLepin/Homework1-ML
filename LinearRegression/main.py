@@ -1,8 +1,11 @@
 import pandas as pd
 import numpy as np
 from scipy import stats
+import matplotlib.pyplot as plt
 
-# Load dataset
+# -------------------------
+# LOAD DATA
+# -------------------------
 df = pd.read_csv(
     "data/Climfrance.csv",
     encoding="latin-1",
@@ -11,15 +14,14 @@ df = pd.read_csv(
 )
 
 # Save mountains for later prediction
-mountains = df[df["station"].isin(["Mont Ventoux", "Pic du Midi"])]
+mountains = df[df["station"].isin(["Mont Ventoux", "Pic du Midi"])].copy()
 
 # Remove mountains for training
-df = df[~df["station"].isin(["Mont Ventoux", "Pic du Midi"])]
+df = df[~df["station"].isin(["Mont Ventoux", "Pic du Midi"])].copy()
 
 # -------------------------
 # PART 1 REGRESSION
 # -------------------------
-
 X = df[["lat", "lon", "altitude"]].values
 y = df["t_mean"].values
 
@@ -62,18 +64,17 @@ print(p_values)
 # -------------------------
 # PART 2 REGRESSION
 # -------------------------
-# Choose two most significant variables (example: lat and altitude)
-
-X2 = df[["lat", "altitude"]].values
-y = df["t_mean"].values
+# Two most significant variables: latitude and altitude
+X2_raw = df[["lat", "altitude"]].values
+y2 = df["t_mean"].values
 
 # Add intercept
-X2 = np.hstack((np.ones((X2.shape[0], 1)), X2))
+X2 = np.hstack((np.ones((X2_raw.shape[0], 1)), X2_raw))
 
 # Fit new regression
 XtX2 = X2.T @ X2
 XtX2_inv = np.linalg.inv(XtX2)
-XtY2 = X2.T @ y
+XtY2 = X2.T @ y2
 coef2 = XtX2_inv @ XtY2
 
 print("\nNew regression coefficients (lat + altitude):")
@@ -81,7 +82,7 @@ print(coef2)
 
 # Residuals
 y_pred2 = X2 @ coef2
-residuals2 = y - y_pred2
+residuals2 = y2 - y_pred2
 
 # MSE
 mse2 = np.mean(residuals2 ** 2)
@@ -92,15 +93,17 @@ n2 = X2.shape[0]
 k2 = X2.shape[1]
 sigma2_2 = np.sum(residuals2**2) / (n2 - k2)
 
-
-X_mountain = mountains[["lat", "altitude"]].values
+# -------------------------
+# PREDICTIONS FOR MOUNTAINS
+# -------------------------
+X_mountain_raw = mountains[["lat", "altitude"]].values
 y_true = mountains["t_mean"].values
+station_names = mountains["station"].values
 
-X_mountain = np.hstack((np.ones((X_mountain.shape[0], 1)), X_mountain))
-
+X_mountain = np.hstack((np.ones((X_mountain_raw.shape[0], 1)), X_mountain_raw))
 pred = X_mountain @ coef2
 
-# 95% confidence intervals
+# 95% confidence intervals for the mean prediction
 t_val = stats.t.ppf(0.975, df=n2-k2)
 
 intervals = []
@@ -114,8 +117,73 @@ for i in range(X_mountain.shape[0]):
 
 print("\nPredictions with 95% confidence intervals:")
 
-for i, station in enumerate(mountains["station"].values):
+for i, station in enumerate(station_names):
     print(f"\n{station}")
     print("True temperature:", y_true[i])
     print("Predicted:", pred[i])
     print("95% CI:", intervals[i])
+
+# -------------------------
+# EVALUATION OF SECOND MODEL
+# -------------------------
+print("\n--- Evaluation of the second model ---")
+print(f"a) Mean square error of the second model: {mse2:.6f}")
+
+# Simple text evaluation
+print("\nb) Model comment:")
+if mse2 < 1:
+    print("The model has a relatively low MSE, so it fits the data reasonably well.")
+else:
+    print("The model has a large MSE, so the fit is not very good.")
+
+print("It captures the main trend of temperature decreasing with latitude and altitude,")
+print("but it may be less accurate for extreme mountain stations.")
+
+# -------------------------
+# 3D SCATTERPLOT
+# -------------------------
+fig = plt.figure(figsize=(10, 7))
+ax = fig.add_subplot(111, projection='3d')
+
+lat = df["lat"].values
+alt = df["altitude"].values
+temp = df["t_mean"].values
+
+ax.scatter(lat, alt, temp, label="Observed data")
+
+ax.set_xlabel("Latitude")
+ax.set_ylabel("Altitude")
+ax.set_zlabel("Mean Temperature")
+ax.set_title("3D Scatterplot of Mean Temperature vs Latitude and Altitude")
+
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+# -------------------------
+# OPTIONAL: 3D SCATTERPLOT + REGRESSION PLANE
+# -------------------------
+fig = plt.figure(figsize=(10, 7))
+ax = fig.add_subplot(111, projection='3d')
+
+# Scatter points
+ax.scatter(lat, alt, temp, label="Observed data")
+
+# Create grid for regression plane
+lat_grid = np.linspace(lat.min(), lat.max(), 30)
+alt_grid = np.linspace(alt.min(), alt.max(), 30)
+LAT, ALT = np.meshgrid(lat_grid, alt_grid)
+
+TEMP_pred = coef2[0] + coef2[1] * LAT + coef2[2] * ALT
+
+# Regression plane
+ax.plot_surface(LAT, ALT, TEMP_pred, alpha=0.5)
+
+ax.set_xlabel("Latitude")
+ax.set_ylabel("Altitude")
+ax.set_zlabel("Mean Temperature")
+ax.set_title("3D Scatterplot with Regression Plane")
+
+plt.legend()
+plt.tight_layout()
+plt.show()
