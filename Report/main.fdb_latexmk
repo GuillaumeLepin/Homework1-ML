@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1774448856.12197 "main.tex" "main.pdf" "main" 1774448857.08596 0
+["pdflatex"] 1774450495.52344 "main.tex" "main.pdf" "main" 1774450496.61588 0
   "../K-means/kmeans_clusters.png" 1774445626.34349 118510 0c12c434b52afc48ac89f4f76cdaca0d ""
   "../K-means/kmeans_elbow.png" 1774445626.41677 61712 23811cb796920d4f889712345f43862e ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
@@ -101,14 +101,16 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1748783102 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1748783017 3345732 1480763c9cade7659ba1cd836c0b076e ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "main.aux" 1774448856.99526 4362 eccfca42331544d4fc29f798970e4518 "pdflatex"
-  "main.out" 1774448856.99613 2897 a61b9712f50cca51a2c13cbe16a89cd5 "pdflatex"
+  "figures/linear_regression_graph.png" 1774450479.02303 110597 ea18365fac83c94031655d14676c087b ""
+  "figures/svm_graph.png" 1774450479.02525 27149 d5097e41906c26cdab0e3180e7b199b6 ""
+  "main.aux" 1774450496.52205 4922 3eb675f7df8a4b4616d7ff03738c5ebf "pdflatex"
+  "main.out" 1774450496.52325 2897 a61b9712f50cca51a2c13cbe16a89cd5 "pdflatex"
   "main.tex" 1774448737.48826 875 6649fe7d3bf6fe55e4abf593b26239aa ""
-  "main.toc" 1774448856.99636 2441 be4eae7b50cbb63ee6d7bac905ca0667 "pdflatex"
-  "sections/01_linear_regression.tex" 1774448529.41603 2381 6fc0ffa724692ad3f4d214c031a21dc4 ""
+  "main.toc" 1774450496.52356 2441 be4eae7b50cbb63ee6d7bac905ca0667 "pdflatex"
+  "sections/01_linear_regression.tex" 1774450484.18744 2613 92eccb9b28b1709bb7f0e0457ca106c1 ""
   "sections/02_pca.tex" 1774448822.7065 635 17f1c42f6ebc54cc12f63f3d22c5779a ""
   "sections/03_kmeans.tex" 1774448568.0764 3441 8825a5d1aad7b670dbddad4c6a9018e6 ""
-  "sections/04_svm.tex" 1774448585.91934 3021 f94b72ae2fe10a46a63b942f43307f33 ""
+  "sections/04_svm.tex" 1774450491.97828 3225 36f5967820869f004d7dee0231b1adbc ""
   (generated)
   "main.aux"
   "main.log"
