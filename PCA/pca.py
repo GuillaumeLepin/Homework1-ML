@@ -1,5 +1,8 @@
 import numpy as np
 
+
+np.set_printoptions(precision=2, suppress=True)
+
 # Dataset
 B = np.array([
     [2, 2, 4],
@@ -26,8 +29,6 @@ print(B_centered)
 print("\n")
 
 
-
-
 # Step 2 : Covariance
 
 # Covariance data
@@ -47,3 +48,20 @@ eigenvalues, eigenvectors = np.linalg.eig(cov_matrix)
 print("Eigenvalues:")
 print(eigenvalues)
 print("\n")
+
+
+# Sort eigenvalues (descending)
+idx = np.argsort(eigenvalues)[::-1]
+eigenvalues = eigenvalues[idx]
+eigenvectors = eigenvectors[:, idx]
+
+# First principal component
+pc1 = eigenvectors[:, 0]
+
+# Projection
+B_reduced = B_centered @ pc1
+
+print("Projected data (1D):")
+print(B_reduced)
+
+
