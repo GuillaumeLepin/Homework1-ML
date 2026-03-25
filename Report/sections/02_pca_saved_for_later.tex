@@ -1,0 +1,99 @@
+\section{Principal Component Analysis (PCA)}
+
+\subsection{1. Data Preprocessing}
+\textbf{Task:} Present centered data.
+
+\paragraph{Answer.}
+Given
+\[
+B=\begin{bmatrix}
+2 & 2 & 4\\
+2 & 4 & 6\\
+4 & 6 & 10\\
+4 & 8 & 12
+\end{bmatrix},
+\quad
+\mu=\begin{bmatrix}3 & 5 & 8\end{bmatrix},
+\]
+the centered data matrix is
+\[
+B_c=B-\mu=
+\begin{bmatrix}
+-1 & -3 & -4\\
+-1 & -1 & -2\\
+ 1 &  1 &  2\\
+ 1 &  3 &  4
+\end{bmatrix}.
+\]
+
+\subsection{2. Covariance Structure}
+\textbf{Task:} Present covariance/scatter matrix.
+
+\paragraph{Answer.}
+Using the centered matrix with variables in columns, the covariance matrix is:
+\[
+\Sigma=
+\begin{bmatrix}
+1.3333 & 2.6667 & 4.0000\\
+2.6667 & 6.6667 & 9.3333\\
+4.0000 & 9.3333 & 13.3333
+\end{bmatrix}.
+\]
+All off-diagonal entries are positive and large, which indicates strong correlation between features and therefore substantial redundancy in the original representation.
+
+\subsection{3. Eigen Decomposition}
+\textbf{Task:} Derive eigenvalues of covariance matrix.
+
+\paragraph{Answer.}
+The eigenvalues (sorted in descending order) are:
+\[
+\lambda_1=21.0803,\quad
+\lambda_2=0.2530,\quad
+\lambda_3\approx 0.
+\]
+The near-zero third eigenvalue indicates that one direction contributes almost no additional variance, consistent with an almost lower-dimensional structure.
+
+A corresponding first principal direction (unit eigenvector) is:
+\[
+v_1=
+\begin{bmatrix}
+-0.2365\\
+-0.5586\\
+-0.7950
+\end{bmatrix}.
+\]
+
+\subsection{4. Projection}
+\textbf{Task:} Project data onto first principal component.
+
+\paragraph{Answer.}
+Projection onto the first principal component is computed by:
+\[
+z_i = B_{c,i}\,v_1.
+\]
+The resulting 1D coordinates are:
+\[
+z=
+\begin{bmatrix}
+5.0923,\ 2.3851,\ -2.3851,\ -5.0923
+\end{bmatrix}.
+\]
+This 1D representation preserves almost all information while greatly reducing dimensionality.
+
+\subsection{5. Interpretation}
+\textbf{Task:} Discuss redundancy, intrinsic dimensionality, and explained variance.
+
+\paragraph{Answer.}
+Explained variance ratios from the eigenvalues are approximately:
+\[
+\frac{\lambda_1}{\sum\lambda}=98.81\%,\quad
+\frac{\lambda_2}{\sum\lambda}=1.19\%,\quad
+\frac{\lambda_3}{\sum\lambda}\approx 0\%.
+\]
+Therefore:
+\begin{itemize}
+  \item most variance is concentrated in the first principal component;
+  \item the effective intrinsic dimensionality is close to 1;
+  \item the original three features are highly redundant.
+\end{itemize}
+In practice, projecting onto the first principal component is an accurate low-dimensional summary for this dataset.
