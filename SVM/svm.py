@@ -8,12 +8,12 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
-# Load dataset
+# digits data
 digits = load_digits()
 X = digits.data
 y = digits.target
 
-# Train / validation split
+# split
 X_train, X_val, y_train, y_val = train_test_split(
     X,
     y,
@@ -22,10 +22,9 @@ X_train, X_val, y_train, y_val = train_test_split(
     stratify=y
 )
 
-# Logarithmically spaced values of C
+# C grid
 C_values = np.logspace(-4, 4, 9)
 
-# Store accuracies
 rbf_accuracies = []
 
 print("\n--- Part 4: RBF kernel SVM experiment ---")
@@ -44,7 +43,7 @@ for C in C_values:
 
     print(f"RBF SVM - C={C:.4f}, validation accuracy={acc:.4f}")
 
-# Best RBF model
+# best run
 best_rbf_idx = np.argmax(rbf_accuracies)
 best_rbf_C = C_values[best_rbf_idx]
 best_rbf_acc = rbf_accuracies[best_rbf_idx]
@@ -53,7 +52,7 @@ print("\nBest RBF SVM result:")
 print(f"Best C = {best_rbf_C}")
 print(f"Best validation accuracy = {best_rbf_acc:.4f}")
 
-# Retrain best model for detailed evaluation
+# retrain best one
 best_rbf_model = make_pipeline(
     StandardScaler(),
     SVC(kernel="rbf", C=best_rbf_C, gamma="scale", random_state=42)
@@ -68,7 +67,7 @@ print(classification_report(y_val, best_rbf_pred))
 print("Confusion matrix for best RBF SVM:")
 print(confusion_matrix(y_val, best_rbf_pred))
 
-# Plot validation accuracy vs C
+# plot acc
 plt.figure(figsize=(8, 5))
 plt.plot(C_values, rbf_accuracies, marker="o")
 plt.xscale("log")
@@ -79,10 +78,7 @@ plt.grid(True)
 plt.tight_layout()
 plt.show()
 
-# -------------------------
-# COMPARISON WITH LINEAR SVM
-# -------------------------
-# Put here the best linear SVM accuracy you already found in Part 3
+# compare with linear result from part 3
 best_linear_acc = 0.9694
 best_linear_C = 0.1
 
@@ -100,4 +96,3 @@ elif best_rbf_acc < best_linear_acc:
 else:
     print("The RBF kernel and the linear SVM achieve the same validation accuracy.")
     print("This suggests that the dataset is close to linearly separable.")
-

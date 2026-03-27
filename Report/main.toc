@@ -11,26 +11,26 @@
 \contentsline {subsection}{\numberline {2.2}2. Covariance Structure}{3}{subsection.2.2}%
 \contentsline {paragraph}{Answer.}{3}{section*.6}%
 \contentsline {subsection}{\numberline {2.3}3. Eigen Decomposition}{3}{subsection.2.3}%
-\contentsline {paragraph}{Answer.}{3}{section*.7}%
-\contentsline {subsection}{\numberline {2.4}4. Projection}{3}{subsection.2.4}%
-\contentsline {paragraph}{Answer.}{3}{section*.8}%
-\contentsline {subsection}{\numberline {2.5}5. Interpretation}{3}{subsection.2.5}%
-\contentsline {paragraph}{Answer.}{3}{section*.9}%
-\contentsline {section}{\numberline {3}K-means Clustering}{4}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Part 1}{4}{subsection.3.1}%
-\contentsline {paragraph}{Answer.}{4}{section*.10}%
-\contentsline {subsection}{\numberline {3.2}Part 2}{4}{subsection.3.2}%
-\contentsline {paragraph}{Answer.}{4}{section*.11}%
-\contentsline {subsection}{\numberline {3.3}Part 3}{5}{subsection.3.3}%
-\contentsline {paragraph}{Answer.}{5}{section*.12}%
-\contentsline {subsection}{\numberline {3.4}Part 4}{5}{subsection.3.4}%
-\contentsline {paragraph}{Answer.}{5}{section*.13}%
-\contentsline {section}{\numberline {4}Support Vector Machine (SVM)}{7}{section.4}%
-\contentsline {subsection}{\numberline {4.1}1. Review of SVM Strategies}{7}{subsection.4.1}%
-\contentsline {paragraph}{Answer.}{7}{section*.14}%
-\contentsline {subsection}{\numberline {4.2}2. Regularization Parameter}{7}{subsection.4.2}%
-\contentsline {paragraph}{Answer.}{7}{section*.15}%
-\contentsline {subsection}{\numberline {4.3}3. Linear SVM Experiment}{7}{subsection.4.3}%
-\contentsline {paragraph}{Answer.}{7}{section*.16}%
-\contentsline {subsection}{\numberline {4.4}4. Kernel SVM Experiment}{7}{subsection.4.4}%
-\contentsline {paragraph}{Answer.}{8}{section*.17}%
+\contentsline {paragraph}{Answer.}{4}{section*.7}%
+\contentsline {subsection}{\numberline {2.4}4. Projection}{4}{subsection.2.4}%
+\contentsline {paragraph}{Answer.}{4}{section*.8}%
+\contentsline {subsection}{\numberline {2.5}5. Interpretation}{4}{subsection.2.5}%
+\contentsline {paragraph}{Answer.}{4}{section*.9}%
+\contentsline {section}{\numberline {3}K-means Clustering}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Part 1}{5}{subsection.3.1}%
+\contentsline {paragraph}{Answer.}{5}{section*.10}%
+\contentsline {subsection}{\numberline {3.2}Part 2}{5}{subsection.3.2}%
+\contentsline {paragraph}{Answer.}{5}{section*.11}%
+\contentsline {subsection}{\numberline {3.3}Part 3}{6}{subsection.3.3}%
+\contentsline {paragraph}{Answer.}{6}{section*.12}%
+\contentsline {subsection}{\numberline {3.4}Part 4}{6}{subsection.3.4}%
+\contentsline {paragraph}{Answer.}{6}{section*.13}%
+\contentsline {section}{\numberline {4}Support Vector Machine (SVM)}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}1. Review of SVM Strategies}{8}{subsection.4.1}%
+\contentsline {paragraph}{Answer.}{8}{section*.14}%
+\contentsline {subsection}{\numberline {4.2}2. Regularization Parameter}{8}{subsection.4.2}%
+\contentsline {paragraph}{Answer.}{8}{section*.15}%
+\contentsline {subsection}{\numberline {4.3}3. Linear SVM Experiment}{8}{subsection.4.3}%
+\contentsline {paragraph}{Answer.}{8}{section*.16}%
+\contentsline {subsection}{\numberline {4.4}4. Kernel SVM Experiment}{8}{subsection.4.4}%
+\contentsline {paragraph}{Answer.}{9}{section*.17}%

@@ -5,18 +5,18 @@ import numpy as np
 
 
 def load_dataset(csv_path: Path) -> np.ndarray:
-    """Load the 2D dataset from CSV with NumPy."""
+    """load csv"""
     return np.loadtxt(csv_path, delimiter=",", skiprows=1)
 
 
 def assign_clusters(points: np.ndarray, centroids: np.ndarray) -> np.ndarray:
-    """Assign each point to the nearest centroid."""
+    """closest centroid for each point"""
     distances = np.linalg.norm(points[:, np.newaxis, :] - centroids[np.newaxis, :, :], axis=2)
     return np.argmin(distances, axis=1)
 
 
 def update_centroids(points: np.ndarray, labels: np.ndarray, centroids: np.ndarray) -> np.ndarray:
-    """Update centroid locations as mean of assigned points."""
+    """recompute center of each cluster"""
     new_centroids = centroids.copy()
     for i in range(len(centroids)):
         cluster_points = points[labels == i]
@@ -26,7 +26,7 @@ def update_centroids(points: np.ndarray, labels: np.ndarray, centroids: np.ndarr
 
 
 def run_kmeans(points: np.ndarray, k: int = 3, max_iter: int = 100, tol: float = 1e-4, seed: int = 42):
-    """Run K-means and return labels and centroids."""
+    """basic kmeans loop"""
     rng = np.random.default_rng(seed)
     centroids = points[rng.choice(len(points), size=k, replace=False)]
 
@@ -46,16 +46,13 @@ def run_kmeans(points: np.ndarray, k: int = 3, max_iter: int = 100, tol: float =
 
 
 def compute_wcss(points: np.ndarray, labels: np.ndarray, centroids: np.ndarray) -> float:
-    """Compute within-cluster sum of squares (WCSS)."""
+    """within cluster ss"""
     diffs = points - centroids[labels]
     return float(np.sum(diffs ** 2))
 
 
 def choose_elbow_k(k_values, wcss_values) -> int:
-    """
-    Pick an elbow K using discrete curvature:
-    the index with largest positive change in slope.
-    """
+    """pick K from bend in curve"""
     if len(k_values) < 3:
         return int(k_values[0])
 
@@ -66,7 +63,7 @@ def choose_elbow_k(k_values, wcss_values) -> int:
 
 
 def run_elbow_analysis(points: np.ndarray, k_values, max_iter: int = 100, tol: float = 1e-4, seed: int = 42):
-    """Run K-means for each K and collect WCSS values."""
+    """run kmeans for many K values"""
     wcss_values = []
     for k in k_values:
         labels, centroids = run_kmeans(points, k=k, max_iter=max_iter, tol=tol, seed=seed)
@@ -78,7 +75,7 @@ def run_elbow_analysis(points: np.ndarray, k_values, max_iter: int = 100, tol: f
 
 
 def plot_clusters(points: np.ndarray, labels: np.ndarray, centroids: np.ndarray, output_path: Path) -> None:
-    """Create scatter plot with cluster colors and final centroids."""
+    """scatter plot with centroids"""
     colors = ["tab:blue", "tab:orange", "tab:green"]
 
     plt.figure(figsize=(8, 6))
@@ -115,7 +112,7 @@ def plot_clusters(points: np.ndarray, labels: np.ndarray, centroids: np.ndarray,
 
 
 def plot_elbow_curve(k_values, wcss_values: np.ndarray, output_path: Path) -> None:
-    """Plot WCSS versus K for elbow analysis."""
+    """elbow graph"""
     plt.figure(figsize=(7, 5))
     plt.plot(k_values, wcss_values, marker="o", linestyle="-", color="tab:blue")
     plt.xticks(k_values)
@@ -134,7 +131,7 @@ def main() -> None:
     output_path_clusters = Path(__file__).resolve().parent / "kmeans_clusters.png"
     output_path_elbow = Path(__file__).resolve().parent / "kmeans_elbow.png"
 
-    # Exercise 3 - Part 2
+    # part 2
     points = load_dataset(data_path)
     labels, centroids = run_kmeans(points, k=3)
 
@@ -145,7 +142,7 @@ def main() -> None:
     plot_clusters(points, labels, centroids, output_path_clusters)
     print(f"\nPart 2 plot saved to: {output_path_clusters}")
 
-    # Exercise 3 - Part 3
+    # part 3
     print("\nElbow analysis (K = 2..6):")
     k_values = np.array([2, 3, 4, 5, 6])
     wcss_values = run_elbow_analysis(points, k_values)

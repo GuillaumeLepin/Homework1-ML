@@ -4,28 +4,63 @@
 \textbf{Task:} Present centered data.
 
 \paragraph{Answer.}
-TODO
+After subtracting the mean of each feature from the original matrix \(B\), the centered data is:
+\[
+B_c=
+\begin{bmatrix}
+-1 & -3 & -4\\
+-1 & -1 & -2\\
+ 1 &  1 &  2\\
+ 1 &  3 &  4
+\end{bmatrix}.
+\]
+This centered matrix is the input used for covariance and eigen analysis.
 
 \subsection{2. Covariance Structure}
 \textbf{Task:} Present covariance/scatter matrix.
 
 \paragraph{Answer.}
-TODO
+The covariance matrix is:
+\[
+\Sigma=
+\begin{bmatrix}
+1.33 & 2.67 & 4.00\\
+2.67 & 6.67 & 9.33\\
+4.00 & 9.33 & 13.33
+\end{bmatrix}.
+\]
+The matrix is symmetric, as expected. Diagonal entries are the variances of each feature, while off-diagonal entries are pairwise covariances. The third feature has the largest variance and also strong covariance with the other features, which already suggests correlated (redundant) structure.
 
 \subsection{3. Eigen Decomposition}
 \textbf{Task:} Derive eigenvalues of covariance matrix.
 
 \paragraph{Answer.}
-TODO
+The eigenvalues are approximately:
+\[
+\lambda = [21.08,\ 0.25,\ 0.00].
+\]
+One dominant eigenvalue and two very small ones indicate that most variance is concentrated in a single direction.
 
 \subsection{4. Projection}
 \textbf{Task:} Project data onto first principal component.
 
 \paragraph{Answer.}
-TODO
+Dimensionality reduction is obtained by projecting each centered observation onto the eigenvector associated with the largest eigenvalue (the first principal component). This maps each 3D point to a 1D coordinate while preserving most of the variance.
+
+For this dataset, the projected coordinates are approximately:
+\[
+[5.09,\ 2.39,\ -2.39,\ -5.09].
+\]
+These values represent each sample position along the main variance axis.
 
 \subsection{5. Interpretation}
 \textbf{Task:} Discuss redundancy, intrinsic dimensionality, and explained variance.
 
 \paragraph{Answer.}
-TODO
+The eigenvalue distribution shows that nearly all variance is captured by the first principal component. Therefore:
+\begin{itemize}
+  \item the variables are highly redundant;
+  \item the intrinsic dimensionality is much lower than 3 (close to 1);
+  \item a 1D PCA projection keeps almost all useful information.
+\end{itemize}
+In practical terms, this dataset can be summarized accurately with one principal component, and the remaining components contribute little additional information.
